@@ -9,8 +9,8 @@ First you need to clone the git repo and open it.
 If you're on Windows open the ``build.bat`` file.
 
 ```bat
-set APPLICATION_NAME=<your application name>
-set GAME_DIR=<your application source directories>
+set APPLICATION_NAME= <your application name>
+set GAME_DIR= <your application source directories>
 ```
 
 The first variable is for your application executable name.
@@ -20,3 +20,47 @@ You can change these two to your specific needs.
 
 ### Setting the main application and game loop
 
+When you open the ``main.c`` in the ``src`` folder you are greeted with a pre-written application setup:
+
+```c
+#include "../fw/fw.h"
+
+fw_win_t win;
+
+int main(int32_t argc, char const *argv[]) {
+    fw_win_init(
+        &win,
+        "Hello FireWing",
+        800,
+        600,
+        0);
+
+    while (fw_is_running(win)) {
+        fw_poll_events();
+        fw_swap_buffers(win);
+    }
+    
+    fw_kill();
+    
+    return 0;
+}
+```
+
+Now let's break this structure into small parts.
+
+First in your ```int main()``` you need to declare a new ```fw_win_t``` struct and initialize it with the ```fw_win_init``` function.
+The structure of this function is ```fw_win_init(WINDOW_STRUCT, WINDOW_TITLE, WINDOW_WIDTH, WINDOW_HIEGHT, WINDOW_FLAGS)```
+
+Then we need to create the main game loop width the following:
+ ```c
+while (fw_is_running(win)) {
+    fw_poll_events();
+    fw_swap_buffers(win);
+}
+```
+
+```fw_is_running``` checks if the window is currently running.
+```fw_poll_events``` updates the user input every frame
+```fw_swap_buffers``` shows the next frame to the window
+
+At the end we need to call ```fw_kill()``` otherwise the application wouldn't be able to close.
