@@ -4,6 +4,26 @@
 #define GLT_IMPLEMENTATION
 #include <GL/gltext.h>
 
+/*
+    Dear future me, I can't even begin to express how sorry I am. :(
+    The code below is a mess, and I'm not even sure if it's even working.
+    I don't even know if I'm even using it.
+    My hatred to OpenGL is so deep that I can't even begin to express it. It burns with the
+    fire if a hundred suns. I'm so sorry!
+
+    OpenGL is a mess.
+    I can't even find a single function that works.
+    I can't even find a single function that compiles.
+    
+    The problems with the .jpeg image format a inevitable.
+    Stb_image.h is a mess.
+    Loading a jpeg image with openGL is like throwing rocks at an altistic kid.
+    .JPEG is not my favorite image format.
+
+    UPDATE: I'm not sure what I'm doing wrong.
+    FIX: ?
+*/
+
 fw_win_t win;
 fw_rend_t rend;
 
