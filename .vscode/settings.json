@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "glfw3.h": "c",
+        "windows.h": "c",
+        "gltext.h": "c",
+        "glew.h": "c",
+        "stdio.h": "c",
+        "fw_win.h": "c",
+        "xiosbase": "c",
+        "cstdlib": "c",
+        "fw_example_shader.h": "c",
+        "xutility": "c",
+        "cglm.h": "c"
+    }
+}
