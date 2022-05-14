@@ -15,9 +15,9 @@
     I can't even find a single function that works.
     I can't even find a single function that compiles.
     
-    The problems with the .jpeg image format a inevitable.
+    The problems with the .jpeg image format are inevitable.
     Stb_image.h is a mess.
-    Loading a jpeg image with openGL is like throwing rocks at an altistic kid.
+    Loading a jpeg image with OpenGL is like throwing rocks at an autistic kid.
     .JPEG is not my favorite image format.
 
     UPDATE: I'm not sure what I'm doing wrong.
