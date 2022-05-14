@@ -1,1 +1,1 @@
-gcc -w src/*.c fw/win/*.c fw/app/*.c fw/rend/*.c -o bin/linux/FireWingApplication -lglfw -lGLEW -lGL -lm
+gcc -w src/*.c fw/win/*.c fw/app/*.c fw/rend/*.c fw/input/*.c -o bin/linux/FireWingApplication -lglfw -lGLEW -lGL -lm

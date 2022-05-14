@@ -10,6 +10,8 @@
         "cstdlib": "c",
         "fw_example_shader.h": "c",
         "xutility": "c",
-        "cglm.h": "c"
+        "cglm.h": "c",
+        "fw_shape_shader.h": "c",
+        "fw_sprite_shader.h": "c"
     }
 }

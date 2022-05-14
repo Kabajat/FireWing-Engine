@@ -2,8 +2,8 @@
 
 static const char *fw_sprite_shp_vert =
 "#version 330\n"
-"layout(location = 0) in vec2 position;"
-"layout(location = 1) in vec2 texcoord;"
+"layout(location = 0) in vec2 position;\n"
+"layout(location = 1) in vec2 texcoord;\n"
 "out vec2 v_texcoord;\n"
 "uniform mat4 proj_mat;\n"
 "uniform mat4 model_mat;\n"

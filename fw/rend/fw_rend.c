@@ -1,8 +1,9 @@
 #include "fw_rend.h"
 
-#include "shaders/fw_example_shader.h"
-#include "shaders/fw_sprite_shader.h"
 #include "shaders/fw_post_processing_shader.h"
+#include "shaders/fw_example_shader.h"
+#include "shaders/fw_shape_shader.h"
+#include "shaders/fw_sprite_shader.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -34,6 +35,8 @@ void __fw_set_proj(fw_rend_t *rend, fw_rect_t viewport) {
     glm_translate(rend->proj_mat, (vec3) { viewport.x, viewport.h, 0.0f });
     glm_scale(rend->proj_mat, (vec3) { viewport.w, viewport.h, 1.0f });
 
+    glUseProgram(rend->shape_shp);
+    glUniformMatrix4fv(glGetUniformLocation(rend->shape_shp, "proj_mat"), 1, GL_FALSE, (GLfloat*)rend->proj_mat);
     glUseProgram(rend->sprite_shp);
     glUniformMatrix4fv(glGetUniformLocation(rend->sprite_shp, "proj_mat"), 1, GL_FALSE, (GLfloat*)rend->proj_mat);
 
@@ -49,6 +52,8 @@ void __fw_set_model(fw_rend_t *rend, fw_transf_t transf) {
 
     glm_scale(rend->model_mat, (vec3) { transf.w, transf.h, 1.0f });
 
+    glUseProgram(rend->shape_shp);
+    glUniformMatrix4fv(glGetUniformLocation(rend->shape_shp, "model_mat"), 1, GL_FALSE, (GLfloat*)rend->model_mat);
     glUseProgram(rend->sprite_shp);
     glUniformMatrix4fv(glGetUniformLocation(rend->sprite_shp, "model_mat"), 1, GL_FALSE, (GLfloat*)rend->model_mat);
 
@@ -131,6 +136,13 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
         0.0f, 1.0f, 0.0f, 1.0f
     };
 
+    float shape_vertices[] = {
+        1.0f, 1.0f,
+        1.0f, 0.0f,
+        0.0f, 0.0f,
+        0.0f, 1.0f
+    };
+
     uint32_t triangle_indices[] = {
         0, 1, 2
     };
@@ -149,6 +161,7 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
 
     fw_shader_init(&rend->post_processing_shp, fw_post_processing_shp_vert, fw_post_processing_shp_frag);
     fw_shader_init(&rend->example_shp, fw_example_shader_vert, fw_example_shader_frag);
+    fw_shader_init(&rend->shape_shp, fw_shape_shp_vert, fw_shape_shp_frag);
     fw_shader_init(&rend->sprite_shp, fw_sprite_shp_vert, fw_sprite_shp_frag);
 
     glBindVertexArray(rend->vaos[0]);
@@ -175,8 +188,17 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
 
     glBindVertexArray(rend->vaos[2]);
     glBindBuffer(GL_ARRAY_BUFFER, rend->vbos[2]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(sprite_vertices), sprite_vertices, GL_STREAM_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(shape_vertices), shape_vertices, GL_STREAM_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rend->ebos[2]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(rect_indices), rect_indices, GL_STREAM_DRAW);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glBindVertexArray(0);
+
+    glBindVertexArray(rend->vaos[3]);
+    glBindBuffer(GL_ARRAY_BUFFER, rend->vbos[3]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(sprite_vertices), sprite_vertices, GL_STREAM_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rend->ebos[3]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(rect_indices), rect_indices, GL_STREAM_DRAW);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -184,6 +206,8 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
     glEnableVertexAttribArray(1);
     glBindVertexArray(0);
 }
+
+FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
 
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height) {
     rend->res_width = width;
@@ -242,6 +266,23 @@ FW_API void fw_rend_push_example(fw_rend_t *rend) {
     glBindVertexArray(0);
 }
 
+FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color) {
+    if (!rend->in_frame)
+        return;
+
+    __fw_set_model(rend, transf);
+
+    glUseProgram(rend->shape_shp);
+
+    glUniform4f(glGetUniformLocation(rend->shape_shp, "color"), color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
+    glUniform1f(glGetUniformLocation(rend->shape_shp, "br"), color.br / 255.0f);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindVertexArray(rend->vaos[2]);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
 FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color) {
     if (!rend->in_frame)
         return;
@@ -255,7 +296,7 @@ FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t sp
     glUniform1f(glGetUniformLocation(rend->sprite_shp, "br"), color.br / 255.0f);
 
     glBindTexture(GL_TEXTURE_2D, spr.tex->id);
-    glBindVertexArray(rend->vaos[2]);
+    glBindVertexArray(rend->vaos[3]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

@@ -28,7 +28,7 @@
 
 #define FW_NEW_SPRITE(tex, x, y, w, h) (fw_spr_t){ tex, x, y, w, h }
 
-#define __FW_REND_MAX_GL_OBJECTS 3
+#define __FW_REND_MAX_GL_OBJECTS 4
 
 typedef struct fw_rend_t {
     fw_win_t win;
@@ -44,6 +44,7 @@ typedef struct fw_rend_t {
 
     GLuint post_processing_shp;
     GLuint example_shp;
+    GLuint shape_shp;
     GLuint sprite_shp;
 
     int32_t res_width;
@@ -72,8 +73,8 @@ typedef struct fw_spr_t {
 
 FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32_t res_height);
 
+FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color);
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height);
-
 FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect);
 
 FW_API void fw_rend_begin(fw_rend_t *rend);
@@ -82,4 +83,5 @@ FW_API void fw_rend_end(fw_rend_t *rend);
 FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t internal_format, int32_t format);
 
 FW_API void fw_rend_push_example(fw_rend_t *rend);
+FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color);
 FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color);

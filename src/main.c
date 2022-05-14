@@ -54,17 +54,22 @@ int main(int32_t argc, char const *argv[]) {
     spr0 = FW_NEW_SPRITE(&tex0, 0, 0, tex0.width, tex0.height);
       
     int i;
+    int32_t mx ,my;
 
     while (fw_is_running(win)) {
         fw_poll_events();
 
         fw_rend_set_view(&rend, FW_NEW_RECT(0, 0, 1.0f, 1.0f));
-
+        fw_rend_set_background_color(&rend, FW_NEW_COLOR_RGB(150, 180, 200));
         fw_rend_begin(&rend);
 
+        fw_get_mouse_position(win, &mx, &my);
+
         fw_rend_push_example(&rend);
-        i+=1;
-        fw_rend_push_sprite(&rend, FW_NEW_TRANSFORM(0, 0, 19, 29, 0.5f, 0.5f, i), spr0, FW_NEW_COLOR(255, 0, 200, 255, 150));
+        i += 2.0f * fw_is_mouse_down(win, GLFW_MOUSE_BUTTON_LEFT);
+        i -= 2.0f * fw_is_mouse_down(win, GLFW_MOUSE_BUTTON_RIGHT);
+        fw_rend_push_rect(&rend, FW_NEW_TRANSFORM(0, 0, 19, 29, 0.5f, 0.5f, -i), FW_NEW_COLOR(255, 150, 0, 150, 255));
+        fw_rend_push_sprite(&rend, FW_NEW_TRANSFORM((mx / 3 - 2 * 75), (my / 3 - 1.5f * 75), 19, 29, 0.5f, 0.5f, i), spr0, FW_NEW_COLOR(255, 255, 255, 255, 0));
         fw_rend_end(&rend);
 
         fw_swap_buffers(win);
