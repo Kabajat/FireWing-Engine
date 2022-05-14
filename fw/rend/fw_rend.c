@@ -137,7 +137,7 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
 
     uint32_t frame_indices[] = {
         0, 1, 2,
-        2, 3, 1
+        2, 3, 1,
     };
 
     uint32_t rect_indices[] = {
@@ -242,7 +242,7 @@ FW_API void fw_rend_push_example(fw_rend_t *rend) {
     glBindVertexArray(0);
 }
 
-FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr) {
+FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color) {
     if (!rend->in_frame)
         return;
 
@@ -250,6 +250,9 @@ FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t sp
     __fw_set_tex(rend, spr);
 
     glUseProgram(rend->sprite_shp);
+
+    glUniform4f(glGetUniformLocation(rend->sprite_shp, "color"), color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
+    glUniform1f(glGetUniformLocation(rend->sprite_shp, "br"), color.br / 255.0f);
 
     glBindTexture(GL_TEXTURE_2D, spr.tex->id);
     glBindVertexArray(rend->vaos[2]);

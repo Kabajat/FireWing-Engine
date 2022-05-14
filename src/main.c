@@ -44,7 +44,13 @@ int main(int32_t argc, char const *argv[]) {
     fw_win_set_aspect_ratio(win, win_width, win_height);
     fw_rend_init(&rend, win, win_width, win_height);
 
-    fw_texture_init(&tex0, "/home/box/Documents/Programming/FireWing Engine/FireWing-Engine/bin/linux/resources/test_sprite.png", FW_RGBA8, FW_RGBA);
+    char buffer[256];    
+    getcwd( buffer, 256 );
+    char full_buffer[256];
+    sprintf(full_buffer, "%s\\bin\\win32\\%s", buffer, "resources\\test_sprite.png");
+    printf("%s", full_buffer);
+    
+    fw_texture_init(&tex0, full_buffer, FW_RGBA8, FW_RGBA);
     spr0 = FW_NEW_SPRITE(&tex0, 0, 0, tex0.width, tex0.height);
       
     int i;
@@ -58,7 +64,7 @@ int main(int32_t argc, char const *argv[]) {
 
         fw_rend_push_example(&rend);
         i+=1;
-        fw_rend_push_sprite(&rend, FW_NEW_TRANSFORM(0, 0, 19, 29, 0.5f, 0.5f, i), spr0);
+        fw_rend_push_sprite(&rend, FW_NEW_TRANSFORM(0, 0, 19, 29, 0.5f, 0.5f, i), spr0, FW_NEW_COLOR(255, 0, 200, 255, 150));
         fw_rend_end(&rend);
 
         fw_swap_buffers(win);

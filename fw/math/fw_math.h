@@ -13,6 +13,13 @@
 
 #define FW_NEW_TRANSFORM(x, y, sx, sy, px, py, ang) (fw_transf_t){ x, y, sx, sy, px, py, ang }
 
+#define FW_NEW_COLOR_RGB(r, g, b) (fw_color_t){ r, g, b, 255 }
+#define FW_NEW_COLOR_RGBA(r, g, b, a) (fw_color_t){ r, g, b, a }
+#define FW_NEW_COLOR(r, g, b, a, br) (fw_color_t){ r, g, b, a, br }
+
+#define FW_COLOR_WHITE (fw_color_t){ 255, 255, 255, 255, 0 }
+#define FW_COLOR_BLACK (fw_color_t){ 0, 0, 0, 255, 0 }
+
 typedef struct fw_vec2_t {
     float x;
     float y;
@@ -39,3 +46,8 @@ typedef struct fw_transf_t {
     float pivot_x, pivot_y;
     float angle;
 }fw_transf_t;
+
+typedef struct fw_color_t {
+    uint8_t r, g, b, a;
+    uint8_t br;
+}fw_color_t;

@@ -18,6 +18,13 @@ static const char *fw_sprite_shp_frag =
 "out vec4 out_color;\n"
 "in vec2 v_texcoord;\n"
 "uniform sampler2D tex_sampler;\n"
+"uniform vec4 color;\n"
+"uniform float br;\n"
 "void main() {\n"
-"    out_color = texture(tex_sampler, v_texcoord);\n"
+"   vec4 p = texture( tex_sampler, v_texcoord);\n"
+
+"    if (p.a == 0.0)\n"
+"        discard;\n"
+
+"    out_color = p * color + vec4(br, br, br, 0.0);\n"
 "}\0";

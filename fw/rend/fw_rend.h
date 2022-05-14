@@ -82,4 +82,4 @@ FW_API void fw_rend_end(fw_rend_t *rend);
 FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t internal_format, int32_t format);
 
 FW_API void fw_rend_push_example(fw_rend_t *rend);
-FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr);
+FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color);
