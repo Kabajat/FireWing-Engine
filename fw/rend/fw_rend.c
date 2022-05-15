@@ -30,10 +30,10 @@ void __fw_framebuffer_init(fw_rend_t *rend) {
     rend->fbo_tex = fbo_tex;
 }
 
-void __fw_set_proj(fw_rend_t *rend, fw_rect_t viewport) {
-    glm_ortho(-rend->res_width * 0.5f, rend->res_width * 0.5f, rend->res_height * 0.5f, -rend->res_height * 0.5f, -1.0f, 1.0f, rend->proj_mat);
-    glm_translate(rend->proj_mat, (vec3) { viewport.x, viewport.h, 0.0f });
-    glm_scale(rend->proj_mat, (vec3) { viewport.w, viewport.h, 1.0f });
+void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) {
+    glm_ortho(rend->res_width * border.x, rend->res_width * border.y, rend->res_height * border.w, rend->res_height * border.h, -1.0f, 1.0f, rend->proj_mat);
+    glm_translate(rend->proj_mat, (vec3) { rect.x, rect.h, 0.0f });
+    glm_scale(rend->proj_mat, (vec3) { rect.w, rect.h, 1.0f });
 
     glUseProgram(rend->shape_shp);
     glUniformMatrix4fv(glGetUniformLocation(rend->shape_shp, "proj_mat"), 1, GL_FALSE, (GLfloat*)rend->proj_mat);
@@ -164,6 +164,8 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
     fw_shader_init(&rend->shape_shp, fw_shape_shp_vert, fw_shape_shp_frag);
     fw_shader_init(&rend->sprite_shp, fw_sprite_shp_vert, fw_sprite_shp_frag);
 
+    fw_rend_set_view(rend, FW_NEW_RECT(0, 0, 1, 1), FW_BORDER_CENTER);
+
     glBindVertexArray(rend->vaos[0]);
     glBindBuffer(GL_ARRAY_BUFFER, rend->vbos[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(frame_vertices), frame_vertices, GL_STREAM_DRAW);
@@ -218,7 +220,7 @@ FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t heigh
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect) { __fw_set_proj(rend, rect); }
+FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) { __fw_set_proj(rend, rect, border); }
 
 FW_API void fw_rend_begin(fw_rend_t *rend) {
     if (rend->in_frame)

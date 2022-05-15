@@ -26,6 +26,9 @@
 #define FW_RGBA4 GL_RGBA4
 #define FW_RGBA8 GL_RGBA8
 
+#define FW_BORDER_SCREEN (fw_rect_t) { 0.0f, 1.0f, 1.0f, 0.0f }
+#define FW_BORDER_CENTER (fw_rect_t) { -0.5f, 0.5f, 0.5f, -0.5f }
+
 #define FW_NEW_SPRITE(tex, x, y, w, h) (fw_spr_t){ tex, x, y, w, h }
 
 #define __FW_REND_MAX_GL_OBJECTS 4
@@ -75,7 +78,7 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
 
 FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color);
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height);
-FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect);
+FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border);
 
 FW_API void fw_rend_begin(fw_rend_t *rend);
 FW_API void fw_rend_end(fw_rend_t *rend);
