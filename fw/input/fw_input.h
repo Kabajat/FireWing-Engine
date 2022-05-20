@@ -211,7 +211,7 @@
 #define FW_GAMEPAD_AXIS_RIGHT_TRIGGER 5
 #define FW_GAMEPAD_AXIS_LAST          FW_GAMEPAD_AXIS_RIGHT_TRIGGER
 
-FW_API bool fw_is_key_down(fw_win_t win, int32_t key);
-FW_API bool fw_is_mouse_down(fw_win_t win, int32_t button);
+FW_API bool fw_is_key_down(fw_win_t *win, int32_t key);
+FW_API bool fw_is_mouse_down(fw_win_t *win, int32_t button);
 
-FW_API void fw_get_mouse_position(fw_win_t win, int32_t *x, int32_t *y);
+FW_API void fw_get_mouse_position(fw_win_t *win, int32_t *x, int32_t *y);

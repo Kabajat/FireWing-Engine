@@ -98,7 +98,9 @@ FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t intern
     tex->height = height;
 }
 
-FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32_t res_height) {
+FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height) {
+    fw_rend_t *rend = malloc(sizeof(fw_rend_t));
+    
     rend->win = win;
 
     glEnable(GL_BLEND);
@@ -207,7 +209,11 @@ FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
     glBindVertexArray(0);
+
+    return rend;
 }
+
+FW_API void fw_rend_destroy(fw_rend_t *rend) { free(rend); }
 
 FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
 

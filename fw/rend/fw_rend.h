@@ -6,6 +6,7 @@
 #include <cglm/cglm.h>
 #include <cglm/mat4.h>
 
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -34,7 +35,7 @@
 #define __FW_REND_MAX_GL_OBJECTS 4
 
 typedef struct fw_rend_t {
-    fw_win_t win;
+    fw_win_t *win;
 
     bool in_frame;
 
@@ -74,7 +75,7 @@ typedef struct fw_spr_t {
     int32_t width, height;
 }fw_spr_t;
 
-FW_API void fw_rend_init(fw_rend_t *rend, fw_win_t win, int32_t res_width, int32_t res_height);
+FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height);
 
 FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color);
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height);
