@@ -28,11 +28,10 @@ When you open the ``main.c`` in the ``src`` folder you are greeted with a pre-wr
 ```c
 #include "../fw/fw.h"
 
-fw_win_t win;
+fw_win_t *win;
 
 int main(int32_t argc, char const *argv[]) {
-    fw_win_init(
-        &win,
+    win = fw_win_init(
         "Hello FireWing",
         800,
         600,
