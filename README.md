@@ -1,7 +1,7 @@
 # FireWing-Engine
 FireWing is a set of tools built with OpenGL to help the creation of pixel art games in C/C++.
 
-<img src="https://github.com/Kabajat/FireWing-Engine/blob/master/logo.png" style="margin-left:200px;" width="256"/>
+<img src="https://github.com/Kabajat/FireWing-Engine/blob/master/logo.png" width="256"/>
 
 ## Requirements
 MinGW, GCC
