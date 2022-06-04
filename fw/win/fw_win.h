@@ -11,6 +11,7 @@
 #define FW_API extern
 #endif
 
+#define FW_USE_CORE_PROFILE 0x00032001
 #define FW_RESIZABLE GLFW_RESIZABLE
 
 typedef GLFWwindow fw_win_t;

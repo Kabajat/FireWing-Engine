@@ -76,6 +76,7 @@ typedef struct fw_spr_t {
 }fw_spr_t;
 
 FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height);
+FW_API void fw_rend_destroy(fw_rend_t *rend);
 
 FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color);
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height);
@@ -89,3 +90,5 @@ FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t intern
 FW_API void fw_rend_push_example(fw_rend_t *rend);
 FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color);
 FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color);
+
+FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, size_t points_size, fw_color_t color, float width, bool connect_lines);

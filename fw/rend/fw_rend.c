@@ -41,6 +41,14 @@ void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) {
     glUniformMatrix4fv(glGetUniformLocation(rend->sprite_shp, "proj_mat"), 1, GL_FALSE, (GLfloat*)rend->proj_mat);
 
     glUseProgram(0);
+    glMatrixMode(GL_PROJECTION);
+
+    glOrtho(rend->res_width * border.x, rend->res_width * border.y, rend->res_height * border.w, rend->res_height * border.h, -1.0f, 1.0f);
+    
+    glTranslatef(rect.x, rect.h, 0.0f);
+    glScalef(rect.w, rect.h, 1.0f);
+
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void __fw_set_model(fw_rend_t *rend, fw_transf_t transf) {
@@ -307,4 +315,18 @@ FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t sp
     glBindVertexArray(rend->vaos[3]);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, size_t points_size, fw_color_t color, float width, bool connect_lines) {
+    glUseProgram(0);
+    
+    glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
+    glLineWidth(width);
+
+    glBegin(connect_lines ? GL_LINE_LOOP : GL_LINES);
+
+    for (size_t i = 0; i < points_size; i+=1)
+        glVertex2f(points[i].x, points[i].y);
+
+    glEnd();
 }

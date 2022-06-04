@@ -12,6 +12,7 @@
         "xutility": "c",
         "cglm.h": "c",
         "fw_shape_shader.h": "c",
-        "fw_sprite_shader.h": "c"
+        "fw_sprite_shader.h": "c",
+        "fw.h": "c"
     }
 }

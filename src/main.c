@@ -14,6 +14,7 @@ int32_t main(int32_t argc, char const *argv[]) {
         fw_swap_buffers(win);
     }
 
+    fw_win_destroy(win);
     fw_kill();
     
     return 0;

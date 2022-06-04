@@ -8,7 +8,7 @@ FW_API fw_win_t *fw_win_init(const char *title, int32_t width, int32_t height, f
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
     glfwWindowHint(GLFW_RESIZABLE, (flags & GLFW_RESIZABLE) ? GL_TRUE : GL_FALSE);
     
