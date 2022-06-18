@@ -1,6 +1,7 @@
 #include "fw_win.h"
 
-FW_API fw_win_t *fw_win_init(const char *title, int32_t width, int32_t height, fw_win_flags_t flags) {
+FW_API fw_win_t *fw_win_init(const char *title, int32_t width, int32_t height, fw_win_flags_t flags)
+{
     if (!glfwInit()) {
         printf("Failed to initialize GLFW\n");
         exit(-1);
