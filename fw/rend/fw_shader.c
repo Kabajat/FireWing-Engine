@@ -1,6 +1,7 @@
 #include "fw_shader.h"
 
-FW_API void fw_shader_init(GLuint *program, const char *vertex_source, const char *fragment_source) {
+FW_API void fw_shader_init(GLuint *program, const char *vertex_source, const char *fragment_source)
+{
     GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex_shader, 1, &vertex_source, NULL);
     glCompileShader(vertex_shader);
