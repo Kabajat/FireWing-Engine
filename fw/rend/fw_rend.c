@@ -8,7 +8,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-void __fw_framebuffer_init(fw_rend_t *rend) {
+void __fw_framebuffer_init(fw_rend_t *rend)
+{
     GLuint fbo;
     glGenFramebuffers(1, &fbo);
 
@@ -30,7 +31,8 @@ void __fw_framebuffer_init(fw_rend_t *rend) {
     rend->fbo_tex = fbo_tex;
 }
 
-void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) {
+void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border)
+{
     glm_ortho(rend->res_width * border.x, rend->res_width * border.y, rend->res_height * border.w, rend->res_height * border.h, -1.0f, 1.0f, rend->proj_mat);
     glm_translate(rend->proj_mat, (vec3) { rect.x, rect.h, 0.0f });
     glm_scale(rend->proj_mat, (vec3) { rect.w, rect.h, 1.0f });
@@ -51,7 +53,8 @@ void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) {
     glMatrixMode(GL_MODELVIEW);
 }
 
-void __fw_set_model(fw_rend_t *rend, fw_transf_t transf) {
+void __fw_set_model(fw_rend_t *rend, fw_transf_t transf)
+{
     glm_mat4_identity(rend->model_mat);
     glm_translate(rend->model_mat, (vec3) { transf.x, transf.y, 0.0f });
 
@@ -68,7 +71,8 @@ void __fw_set_model(fw_rend_t *rend, fw_transf_t transf) {
     glUseProgram(0);
 }
 
-void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr) {
+void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr)
+{
     glm_mat4_identity(rend->tex_mat);
     glm_translate(rend->tex_mat, (vec3) { spr.x / (float)spr.tex->width, spr.y / (float)spr.tex->height, 0.0f });
     glm_scale(rend->tex_mat, (vec3) { spr.width / (float)spr.tex->width, spr.height / (float)spr.tex->height, 1.0f });
@@ -79,7 +83,8 @@ void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr) {
     glUseProgram(0);
 }
 
-FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t internal_format, int32_t format) {
+FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t internal_format, int32_t format)
+{
     GLuint tex_id;
     glGenTextures(1, &tex_id);
     glBindTexture(GL_TEXTURE_2D, tex_id);
@@ -106,7 +111,8 @@ FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t intern
     tex->height = height;
 }
 
-FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height) {
+FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height)
+{
     fw_rend_t *rend = malloc(sizeof(fw_rend_t));
     
     rend->win = win;
@@ -225,7 +231,8 @@ FW_API void fw_rend_destroy(fw_rend_t *rend) { free(rend); }
 
 FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
 
-FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height) {
+FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height)
+{
     rend->res_width = width;
     rend->res_height = height;
 
@@ -236,7 +243,8 @@ FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t heigh
 
 FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) { __fw_set_proj(rend, rect, border); }
 
-FW_API void fw_rend_begin(fw_rend_t *rend) {
+FW_API void fw_rend_begin(fw_rend_t *rend)
+{
     if (rend->in_frame)
         return;
 
@@ -250,7 +258,8 @@ FW_API void fw_rend_begin(fw_rend_t *rend) {
     glViewport(0, 0, rend->res_width, rend->res_height);
 }
 
-FW_API void fw_rend_end(fw_rend_t *rend) {
+FW_API void fw_rend_end(fw_rend_t *rend)
+{
     if (!rend->in_frame)
         return;
 
@@ -272,7 +281,8 @@ FW_API void fw_rend_end(fw_rend_t *rend) {
     rend->in_frame = false;
 }
 
-FW_API void fw_rend_push_example(fw_rend_t *rend) {
+FW_API void fw_rend_push_example(fw_rend_t *rend)
+{
     if (!rend->in_frame)
         return;
     
@@ -282,7 +292,8 @@ FW_API void fw_rend_push_example(fw_rend_t *rend) {
     glBindVertexArray(0);
 }
 
-FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color) {
+FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color)
+{
     if (!rend->in_frame)
         return;
 
@@ -299,7 +310,8 @@ FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t co
     glBindVertexArray(0);
 }
 
-FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color) {
+FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color)
+{
     if (!rend->in_frame)
         return;
 
@@ -317,7 +329,8 @@ FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t sp
     glBindVertexArray(0);
 }
 
-FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, size_t points_size, fw_color_t color, float width, bool connect_lines) {
+FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, size_t points_size, fw_color_t color, float width, bool connect_lines)
+{
     glUseProgram(0);
     
     glColor4f(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f);
