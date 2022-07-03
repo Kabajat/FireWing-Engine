@@ -83,7 +83,7 @@ void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr)
     glUseProgram(0);
 }
 
-FW_API fw_tex_t fw_texture_init(const char* file_name, int32_t internal_format, int32_t format)
+FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, int32_t format)
 {
     GLuint tex_id;
     glGenTextures(1, &tex_id);
