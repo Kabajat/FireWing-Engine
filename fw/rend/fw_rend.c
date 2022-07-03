@@ -83,7 +83,7 @@ void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr)
     glUseProgram(0);
 }
 
-FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, int32_t format)
+FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, int32_t format, int32_t filter)
 {
     GLuint tex_id;
     glGenTextures(1, &tex_id);
@@ -91,8 +91,8 @@ FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter);
 
     int width, height, nrChannels;
     unsigned char *data = stbi_load(file_name, &width, &height, &nrChannels, 0);
