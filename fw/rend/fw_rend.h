@@ -27,6 +27,9 @@
 #define FW_RGBA4 GL_RGBA4
 #define FW_RGBA8 GL_RGBA8
 
+#define FW_NEAREST GL_NEAREST
+#define FW_LINEAR GL_LINEAR
+
 #define FW_BORDER_SCREEN (fw_rect_t) { 0.0f, 1.0f, 1.0f, 0.0f }
 #define FW_BORDER_CENTER (fw_rect_t) { -0.5f, 0.5f, 0.5f, -0.5f }
 
@@ -85,7 +88,7 @@ FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border);
 FW_API void fw_rend_begin(fw_rend_t *rend);
 FW_API void fw_rend_end(fw_rend_t *rend);
 
-FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, int32_t format);
+FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, int32_t format, int32_t filter);
 
 FW_API void fw_rend_push_example(fw_rend_t *rend);
 FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color);
