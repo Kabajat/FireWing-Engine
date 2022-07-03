@@ -83,7 +83,7 @@ void __fw_set_tex(fw_rend_t *rend, fw_spr_t spr)
     glUseProgram(0);
 }
 
-FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t internal_format, int32_t format)
+FW_API fw_tex_t fw_texture_init(const char* file_name, int32_t internal_format, int32_t format)
 {
     GLuint tex_id;
     glGenTextures(1, &tex_id);
@@ -106,9 +106,7 @@ FW_API void fw_texture_init(fw_tex_t *tex, const char* file_name, int32_t intern
     
     stbi_image_free(data);
 
-    tex->id = tex_id;
-    tex->width = width;
-    tex->height = height;
+    return (fw_tex_t) { tex_id, width, height };
 }
 
 FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height)
