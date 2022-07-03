@@ -227,7 +227,7 @@ FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_hei
 
 FW_API void fw_rend_destroy(fw_rend_t *rend) { free(rend); }
 
-FW_API void fw_rend_set_background_color(fw_rend_t* rend, fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
+FW_API void fw_set_background_color(fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
 
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height)
 {
