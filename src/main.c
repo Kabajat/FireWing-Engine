@@ -1,4 +1,4 @@
-#include "../fw_util/fw.h"
+#include <fw.h>
 
 fw_win_t *win;
 
