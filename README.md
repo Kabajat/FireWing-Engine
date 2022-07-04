@@ -28,7 +28,7 @@ You can change these two to your specific needs.
 When you open the ``main.c`` in the ``src`` folder you are greeted with a pre-written application setup:
 
 ```c
-#include "../fw/fw.h"
+#include "../fw_util/fw.h"
 
 fw_win_t *win;
 
