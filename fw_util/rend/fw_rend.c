@@ -34,7 +34,7 @@ void __fw_framebuffer_init(fw_rend_t *rend)
 void __fw_set_proj(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border)
 {
     glm_ortho(rend->res_width * border.x, rend->res_width * border.y, rend->res_height * border.w, rend->res_height * border.h, -1.0f, 1.0f, rend->proj_mat);
-    glm_translate(rend->proj_mat, (vec3) { rect.x, rect.h, 0.0f });
+    glm_translate(rend->proj_mat, (vec3) { -rect.x, -rect.y, 0.0f });
     glm_scale(rend->proj_mat, (vec3) { rect.w, rect.h, 1.0f });
 
     glUseProgram(rend->shape_shp);
