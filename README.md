@@ -71,7 +71,8 @@ At the end we need to call ```fw_kill()``` otherwise the application wouldn't be
 
 ### Rendering
 
-To draw things to the screen we need a ```c
+To draw things to the screen we need a ```
 fw_rent_t```.
 You can initialize it by doing ```c
-fw_rent_t *rend = fw_rend_init(WINDOW_STRUCT, RESOLUTION_WIDTH, RESOLUTION_HEIGHT);```
+fw_rent_t *rend = fw_rend_init(WINDOW_STRUCT, RESOLUTION_WIDTH, RESOLUTION_HEIGHT);
+```
