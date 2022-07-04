@@ -2,7 +2,8 @@
 
 fw_win_t *win;
 
-int32_t main(int32_t argc, char const *argv[]) {
+int32_t main(int32_t argc, char const *argv[])
+{
     win = fw_win_init(
         "Hello FireWing",
         1280,
