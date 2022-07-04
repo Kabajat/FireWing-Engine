@@ -102,7 +102,7 @@ FW_API fw_tex_t fw_texture_init(const char *file_name, int32_t internal_format, 
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
-        printf("Failed to load texture\n");
+        printf("Failed to load texture %s\n", file_name);
     
     stbi_image_free(data);
 
