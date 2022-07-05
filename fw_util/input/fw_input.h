@@ -7,6 +7,7 @@
 #include <stdbool.h>
 
 #include "../win/fw_win.h"
+#include "../math/fw_math.h"
 
 #ifndef FW_API
 #define FW_API extern
