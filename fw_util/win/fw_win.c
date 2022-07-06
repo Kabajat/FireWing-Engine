@@ -21,6 +21,8 @@ FW_API fw_win_t *fw_win_init(const char *title, int32_t width, int32_t height, f
     }
 
     glfwMakeContextCurrent(win);
+    
+    glfwSwapInterval(GLFW_TRUE);
 
     if (glewInit() != GLEW_OK) {
         printf("Failed to initialize GLEW\n");
