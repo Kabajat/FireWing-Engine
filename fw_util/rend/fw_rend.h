@@ -81,9 +81,10 @@ typedef struct fw_spr_t {
 FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height);
 FW_API void fw_rend_destroy(fw_rend_t *rend);
 
-FW_API void fw_set_background_color(fw_color_t color);
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height);
 FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border);
+
+FW_API void fw_clear(fw_color_t clear_color);
 
 FW_API void fw_rend_begin(fw_rend_t *rend);
 FW_API void fw_rend_end(fw_rend_t *rend);
