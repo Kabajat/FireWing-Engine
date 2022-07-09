@@ -20,7 +20,7 @@ void __fw_framebuffer_init(fw_rend_t *rend)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, rend->res_width, rend->res_height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA4, rend->res_width, rend->res_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);  
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, fbo_tex, 0);  
@@ -227,8 +227,6 @@ FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_hei
 
 FW_API void fw_rend_destroy(fw_rend_t *rend) { free(rend); }
 
-FW_API void fw_set_background_color(fw_color_t color) { glClearColor(color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f); }
-
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height)
 {
     rend->res_width = width;
@@ -241,6 +239,14 @@ FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t heigh
 
 FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) { __fw_set_proj(rend, rect, border); }
 
+FW_API void fw_clear(fw_color_t clear_color)
+{
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glClearColor(clear_color.r / 255.0f, clear_color.g / 255.0f, clear_color.b / 255.0f, clear_color.a / 255.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
 FW_API void fw_rend_begin(fw_rend_t *rend)
 {
     if (rend->in_frame)
@@ -251,6 +257,7 @@ FW_API void fw_rend_begin(fw_rend_t *rend)
     glfwGetWindowSize(rend->win, &rend->win_width, &rend->win_height);
 
     glBindFramebuffer(GL_FRAMEBUFFER, rend->fbo);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glViewport(0, 0, rend->res_width, rend->res_height);
@@ -262,7 +269,6 @@ FW_API void fw_rend_end(fw_rend_t *rend)
         return;
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
 
     glLoadIdentity();
     glViewport(0, 0, rend->win_width, rend->win_height);
