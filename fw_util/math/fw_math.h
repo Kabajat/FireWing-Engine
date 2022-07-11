@@ -20,6 +20,8 @@
 #define FW_COLOR_WHITE (fw_color_t){ 255, 255, 255, 255, 0 }
 #define FW_COLOR_BLACK (fw_color_t){ 0, 0, 0, 255, 0 }
 
+#define FW_NATIVE_LERP(f, s, by) (f * (1.0f - by) + s * by)
+
 typedef struct fw_vec2_t {
     float x;
     float y;
