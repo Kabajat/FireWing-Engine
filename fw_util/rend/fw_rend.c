@@ -225,7 +225,10 @@ FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_hei
     return rend;
 }
 
-FW_API void fw_rend_destroy(fw_rend_t *rend) { free(rend); }
+FW_API void fw_rend_destroy(fw_rend_t *rend)
+{
+    free(rend);
+}
 
 FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t height)
 {
@@ -237,7 +240,10 @@ FW_API void fw_rend_set_resolution(fw_rend_t *rend, int32_t width, int32_t heigh
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border) { __fw_set_proj(rend, rect, border); }
+FW_API void fw_rend_set_view(fw_rend_t *rend, fw_rect_t rect, fw_rect_t border)
+{
+    __fw_set_proj(rend, rect, border);
+}
 
 FW_API void fw_clear_screen_buffer(fw_color_t clear_color)
 {
