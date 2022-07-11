@@ -32,7 +32,8 @@ When you open the ``main.c`` in the ``src`` folder you are greeted with a pre-wr
 
 fw_win_t *win;
 
-int main(int32_t argc, char const *argv[]) {
+int main(int32_t argc, char const *argv[])
+{
     win = fw_win_init(
         "Hello FireWing",
         800,
@@ -57,7 +58,8 @@ The structure of this function is ```fw_win_init(WINDOW_STRUCT, WINDOW_TITLE, WI
 
 Then we need to create the main game loop width the following:
  ```c
-while (fw_is_running(win)) {
+while (fw_is_running(win))
+{
     fw_poll_events();
     fw_swap_buffers(win);
 }
