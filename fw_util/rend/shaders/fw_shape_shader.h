@@ -15,7 +15,6 @@ static const char *fw_shape_shp_frag =
 "out vec4 out_color;\n"
 "uniform vec4 color;\n"
 "uniform float br;\n"
-
 "void main() {\n"
 "    out_color = color + vec4(br, br, br, 0.0);\n"
 "}\0";
