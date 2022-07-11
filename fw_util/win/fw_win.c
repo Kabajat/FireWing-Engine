@@ -35,16 +35,37 @@ FW_API fw_win_t *fw_win_init(const char *title, int32_t width, int32_t height, f
     return win;
 }
 
-FW_API void fw_win_destroy(fw_win_t *win) { glfwDestroyWindow(win); }
+FW_API void fw_win_destroy(fw_win_t *win)
+{
+    glfwDestroyWindow(win);
+}
 
-FW_API void fw_win_set_size(fw_win_t *win, int width, int height) { glfwSetWindowSize(win, width, height); }
+FW_API void fw_win_set_size(fw_win_t *win, int width, int height)
+{
+    glfwSetWindowSize(win, width, height);
+}
 
-FW_API void fw_win_set_position(fw_win_t *win, int x, int y) { glfwSetWindowPos(win, x, y); }
+FW_API void fw_win_set_position(fw_win_t *win, int x, int y)
+{
+    glfwSetWindowPos(win, x, y);
+}
 
-FW_API void fw_win_set_title(fw_win_t *win, const char *title) { glfwSetWindowTitle(win, title); }
+FW_API void fw_win_set_title(fw_win_t *win, const char *title)
+{
+    glfwSetWindowTitle(win, title);
+}
 
-FW_API void fw_win_get_size(fw_win_t *win, int *width, int *height) { glfwGetWindowSize(win, width, height); }
+FW_API void fw_win_get_size(fw_win_t *win, int *width, int *height)
+{
+    glfwGetWindowSize(win, width, height);
+}
 
-FW_API void fw_win_get_position(fw_win_t *win, int *x, int *y) { glfwGetWindowPos(win, x, y); }
+FW_API void fw_win_get_position(fw_win_t *win, int *x, int *y)
+{
+    glfwGetWindowPos(win, x, y);
+}
 
-FW_API void fw_win_set_aspect_ratio(fw_win_t *win, int numer, int denom) { glfwSetWindowAspectRatio(win, numer, denom); }
+FW_API void fw_win_set_aspect_ratio(fw_win_t *win, int numer, int denom)
+{
+    glfwSetWindowAspectRatio(win, numer, denom);
+}
