@@ -95,4 +95,5 @@ FW_API void fw_rend_push_example(fw_rend_t *rend);
 FW_API void fw_rend_push_rect(fw_rend_t *rend, fw_transf_t transf, fw_color_t color);
 FW_API void fw_rend_push_sprite(fw_rend_t *rend, fw_transf_t transf, fw_spr_t spr, fw_color_t color);
 
-FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, size_t points_size, fw_color_t color, float width, bool connect_lines);
+FW_API void fw_rend_push_line(fw_rend_t *rend, fw_vec2_t first_point, fw_vec2_t second_point, fw_color_t color, float width);
+FW_API void fw_rend_push_lines(fw_rend_t *rend, fw_vec2_t *points, int32_t point_count, fw_color_t color, float width, bool connect_lines);
