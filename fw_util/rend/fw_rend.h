@@ -35,9 +35,12 @@
 
 #define FW_NEW_SPRITE(tex, x, y, w, h) (fw_spr_t){ tex, x, y, w, h }
 
-#define __FW_REND_MAX_GL_OBJECTS 4
+#define __FW_REND_MAX_GL_VAOS 4
+#define __FW_REND_MAX_GL_VBOS 4
+#define __FW_REND_MAX_GL_EBOS 4
 
-typedef struct fw_rend_t {
+typedef struct fw_rend_t
+{
     fw_win_t *win;
 
     bool in_frame;
@@ -45,9 +48,9 @@ typedef struct fw_rend_t {
     GLuint fbo;
     GLuint fbo_tex;
 
-    GLuint vaos[__FW_REND_MAX_GL_OBJECTS];
-    GLuint vbos[__FW_REND_MAX_GL_OBJECTS];
-    GLuint ebos[__FW_REND_MAX_GL_OBJECTS];
+    GLuint vaos[__FW_REND_MAX_GL_VAOS];
+    GLuint vbos[__FW_REND_MAX_GL_VBOS];
+    GLuint ebos[__FW_REND_MAX_GL_EBOS];
 
     GLuint post_processing_shp;
     GLuint example_shp;
@@ -63,20 +66,25 @@ typedef struct fw_rend_t {
     mat4 proj_mat;
     mat4 model_mat;
     mat4 tex_mat;
-}fw_rend_t;
+}
+fw_rend_t;
 
-typedef struct fw_tex_t {
+typedef struct fw_tex_t
+{
     GLuint id;
     int32_t width;
     int32_t height;
-}fw_tex_t;
+}
+fw_tex_t;
 
-typedef struct fw_spr_t {
+typedef struct fw_spr_t
+{
     fw_tex_t *tex;
 
     int32_t x, y;
     int32_t width, height;
-}fw_spr_t;
+}
+fw_spr_t;
 
 FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_height);
 FW_API void fw_rend_destroy(fw_rend_t *rend);
