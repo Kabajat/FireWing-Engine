@@ -120,9 +120,9 @@ FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_hei
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glGenVertexArrays(__FW_REND_MAX_GL_OBJECTS, rend->vaos);
-    glGenBuffers(__FW_REND_MAX_GL_OBJECTS, rend->vbos);
-    glGenBuffers(__FW_REND_MAX_GL_OBJECTS, rend->ebos);
+    glGenVertexArrays(__FW_REND_MAX_GL_VAOS, rend->vaos);
+    glGenBuffers(__FW_REND_MAX_GL_VBOS, rend->vbos);
+    glGenBuffers(__FW_REND_MAX_GL_EBOS, rend->ebos);
 
     rend->res_width = res_width;
     rend->res_height = res_height;
@@ -132,43 +132,50 @@ FW_API fw_rend_t *fw_rend_init(fw_win_t *win, int32_t res_width, int32_t res_hei
 
     rend->in_frame = false;
 
-    float frame_vertices[] = {
+    float frame_vertices[] =
+    {
         -1.0f, -1.0f, 0.0f, 0.0f,
         1.0f, -1.0f, 1.0f, 0.0f,
         -1.0f, 1.0f, 0.0f, 1.0f,
         1.0f, 1.0f, 1.0f, 1.0f
     };
 
-    float example_vertices[] = {
+    float example_vertices[] =
+    {
         -0.5f, -0.5f, 1.0f, 0.5f, 0.5f,
         0.0f, 0.5f, 0.5f, 1.0f, 0.5f,
         0.5f, -0.5f, 0.5f, 1.0f, 1.0f
     };
 
-    float sprite_vertices[] = {
+    float sprite_vertices[] =
+    {
         1.0f, 1.0f, 1.0f, 1.0f,
         1.0f, 0.0f, 1.0f, 0.0f,
         0.0f, 0.0f, 0.0f, 0.0f,
         0.0f, 1.0f, 0.0f, 1.0f
     };
 
-    float shape_vertices[] = {
+    float shape_vertices[] =
+    {
         1.0f, 1.0f,
         1.0f, 0.0f,
         0.0f, 0.0f,
         0.0f, 1.0f
     };
 
-    uint32_t triangle_indices[] = {
+    uint32_t triangle_indices[] =
+    {
         0, 1, 2
     };
 
-    uint32_t frame_indices[] = {
+    uint32_t frame_indices[] =
+    {
         0, 1, 2,
         2, 3, 1,
     };
 
-    uint32_t rect_indices[] = {
+    uint32_t rect_indices[] =
+    {
         0, 1, 2,
         2, 3, 0
     };
