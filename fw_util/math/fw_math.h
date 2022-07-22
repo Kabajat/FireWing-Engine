@@ -25,31 +25,37 @@
 typedef struct fw_vec2_t {
     float x;
     float y;
-}fw_vec2_t;
+}
+fw_vec2_t;
 
 typedef struct fw_vec2i_t {
     int32_t x;
     int32_t y;
-}fw_vec2i_t;
+}
+fw_vec2i_t;
 
 typedef struct fw_rect_t {
     float x, y;
     float w, h;
-}fw_rect_t;
+}
+fw_rect_t;
 
 typedef struct fw_recti_t {
     int32_t x, y;
     int32_t w, h;
-}fw_recti_t;
+}
+fw_recti_t;
 
 typedef struct fw_transf_t {
     float x, y;
     float w, h;
     float pivot_x, pivot_y;
     float angle;
-}fw_transf_t;
+}
+fw_transf_t;
 
 typedef struct fw_color_t {
     uint8_t r, g, b, a;
     uint8_t br;
-}fw_color_t;
+}
+fw_color_t;
